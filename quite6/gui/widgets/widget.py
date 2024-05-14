@@ -10,6 +10,7 @@ from .. import ClosedSignalInterface, ClassExecInterface, ContainerAbilityInterf
 @ui_extension
 class Widget(QWidget, ClosedSignalInterface, ClassExecInterface, ContainerAbilityInterface):
     def __init__(self, parent=None, *args):
+        # noinspection PyUnresolvedReferences
         super().__init__(parent.w if getattr(parent, 'w', None) is not None else parent, *args)
 
     def closeEvent(self, event: QCloseEvent):

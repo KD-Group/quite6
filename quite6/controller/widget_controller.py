@@ -14,7 +14,9 @@ class WidgetController:
 
     def question(self, text, title='选择'):
         # noinspection PyCallByClass
-        return QMessageBox.question(self.w, title, text, QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes
+        return QMessageBox.question(self.w, title, text,
+                                    QMessageBox.StandardButton.Yes,
+                                    QMessageBox.StandardButton.No) == QMessageBox.StandardButton.Yes
 
     def warning(self, text, title='警告'):
         # noinspection PyCallByClass
@@ -36,8 +38,8 @@ class WidgetController:
 
     def input(self, title, label):
         dialog = QInputDialog()
-        (text, bool) = dialog.getText(self.w, title, label)
-        return text, bool
+        (text, bool_) = dialog.getText(self.w, title, label)
+        return text, bool_
 
     @staticmethod
     def __trick__(constructor, parent) -> Widget:

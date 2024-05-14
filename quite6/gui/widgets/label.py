@@ -20,5 +20,5 @@ class Label(QLabel, BaseInterface, prett6.WidgetStringInterface):
 
     def set_clickable_text(self, show_text, call_data, call_func):
         self.setText("<a href=\"{}\">{}</a>".format(call_data, show_text))
-        self.setTextFormat(Qt.RichText)
+        self.setTextFormat(Qt.TextFormat.RichText)
         self.linkActivated.connect(call_func)

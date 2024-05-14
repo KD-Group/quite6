@@ -37,7 +37,7 @@ class FileDialogController(WidgetController):
         if export_ok:
             msg_box = QMessageBox(self.w)
             msg_box.setWindowTitle('导出成功')
-            msg_box.setIcon(QMessageBox.Information)
+            msg_box.setIcon(QMessageBox.Icon.Information)
             msg_box.setText('报告导出成功，路径为：{0}'.format(filename))
 
             if getattr(self, "view_icon_path", None):
@@ -48,8 +48,8 @@ class FileDialogController(WidgetController):
                 finished_button = QPushButton(QIcon(getattr(self, "finished_icon_path")), '完成', msg_box)
             else:
                 finished_button = QPushButton('完成', msg_box)
-            msg_box.addButton(view_button, msg_box.NoRole)
-            msg_box.addButton(finished_button, msg_box.NoRole)
+            msg_box.addButton(view_button, msg_box.ButtonRole.NoRole)
+            msg_box.addButton(finished_button, msg_box.ButtonRole.NoRole)
             msg_box.setDefaultButton(finished_button)
             msg_box.exec_()
 

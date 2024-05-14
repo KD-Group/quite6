@@ -1,5 +1,5 @@
-from PySide6.QtCore import QSize, QSizeF, QPoint
-from PySide6.QtGui import QPicture, QPixmap, QPainter
+from PySide6.QtCore import QSize, QPoint, QMarginsF
+from PySide6.QtGui import QPicture, QPixmap, QPainter, QPageSize, QPageLayout
 from PySide6.QtPrintSupport import QPrinter
 from PySide6.QtWidgets import QWidget, QMainWindow, QDockWidget, QHBoxLayout
 
@@ -73,14 +73,17 @@ def export_to_pdf(self: Widget, filename: str, export_size=QSize(1060, 730)):
     self.render(painter, QPoint(0, 0))
     painter.end()
 
-    printer = QPrinter()
-    printer.setOutputFormat(QPrinter.PdfFormat)
+    printer = QPrinter(QPrinter.PrinterMode.HighResolution)
+    printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
     printer.setOutputFileName(filename)
+    page_layout = printer.pageLayout()
     if w > h:
-        printer.setOrientation(QPrinter.Landscape)
+        page_layout.setOrientation(QPageLayout.Orientation.Landscape)
     if export_size.width() != 1060 or export_size.height() != 730:
-        printer.setPageSize(QPrinter.Custom)
-        printer.setPaperSize(QSizeF(self.size[1] * 0.8 + 20, self.size[0] * 0.8 + 20), QPrinter.Point)
+        page_layout.setPageSize(QPageSize.PageSizeId.Custom)
+        page_size = QPageSize(QSize(int(self.size[1] * 0.8 + 20), int(self.size[0] * 0.8 + 20)))
+        page_layout.setPageSize(page_size, QMarginsF())
+    printer.setPageLayout(page_layout)
 
     painter = QPainter()
     ok = painter.begin(printer)

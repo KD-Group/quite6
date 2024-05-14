@@ -14,7 +14,7 @@ class DialogUiController(WidgetUiController):
         return self.w.exec()
 
     def setWindowMinimizeButtonHint(self):
-        self.w.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint)
+        self.w.setWindowFlags(Qt.WindowType.WindowMinimizeButtonHint | Qt.WindowType.WindowMaximizeButtonHint)
 
     @classmethod
     def class_exec(cls, *args, **kwargs):

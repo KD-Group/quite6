@@ -1,14 +1,16 @@
 import codecs
 import os
+from typing import Union
 from xml.etree import ElementTree
 
 import st
 from PySide6.QtCore import QByteArray, QBuffer, QIODevice
 from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import QWidget
 
 from . import load_qrc
-from .. import Widget, scaling
 from .. import ext_classes
+from .. import scaling
 
 
 @st.make_cache
@@ -38,7 +40,7 @@ def process_scaling(ui_content: str, ratio: float) -> str:
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + ui_content + '\n'
 
 
-def load_ui(parent=None, filename=None) -> Widget:
+def load_ui(parent=None, filename=None) -> Union[QWidget, QWidget]:
     assert isinstance(filename, str)
 
     ui_content = get_ui_content(filename)
@@ -50,7 +52,7 @@ def load_ui(parent=None, filename=None) -> Widget:
 def auto_generate_cache(dir_path: str):
     assert isinstance(dir_path, str)
     if not os.path.isdir(dir_path):
-        raise ValueError('Paramter Must be Dir Path')
+        raise ValueError('Parameter Must be Dir Path')
     for root_dir, _, files in os.walk(os.path.abspath(dir_path)):
         for file in files:
             if os.path.splitext(file)[1] == '.ui':

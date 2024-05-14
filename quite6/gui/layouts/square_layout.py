@@ -38,7 +38,7 @@ class SquareLayout(QLayout):
         return old_item
 
     def expandingDirections(self):
-        return Qt.Horizontal | Qt.Vertical
+        return Qt.Orientation.Horizontal | Qt.Orientation.Vertical
 
     def sizeHint(self):
         return self.minimumSize()

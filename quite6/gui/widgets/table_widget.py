@@ -35,13 +35,13 @@ class TableWidget(QTableWidget, ExcitedSignalInterface, prett6.WidgetDictInterfa
         self.auto_resize = True
         self.verticalHeader().hide()
         self.resizeColumnsToContents()
-        self.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
     def set_select_rows_mode(self):
-        self.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.setStyleSheet("selection-background-color: lightBlue;selection-color: black;")
-        self.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.selectAll()
         # noinspection PyUnresolvedReferences
         self.itemClicked.connect(self.cancel_current_select)
@@ -125,7 +125,7 @@ class TableWidget(QTableWidget, ExcitedSignalInterface, prett6.WidgetDictInterfa
             col_width = sum(list([self.columnWidth(i) for i in range(col_count)]))
             if col_width < self.width():
                 for i in range(col_count):
-                    self.setColumnWidth(i, self.columnWidth(i) / col_width * self.width())
+                    self.setColumnWidth(i, int(self.columnWidth(i) / col_width * self.width()))
 
     def resizeEvent(self, event):
         super(TableWidget, self).resizeEvent(event)
@@ -181,7 +181,7 @@ class TableWidget(QTableWidget, ExcitedSignalInterface, prett6.WidgetDictInterfa
                         if item_text is None:
                             raise ValueError("key value doesn't match headers label")
                         table_item = QTableWidgetItem(item_text)
-                        table_item.setTextAlignment(Qt.AlignCenter)
+                        table_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                         item_handle = self.parent.get_item_style(self.row_count - 1, i)
                         if item_handle is not None:
                             item_handle(table_item)
