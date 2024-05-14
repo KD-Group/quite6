@@ -1,0 +1,28 @@
+Jefung:
+language: python
+dist: trusty
+python:
+  - '3.4'
+
+install:
+  - pip install PySide6 --no-index --find-links https://parkin.github.io/python-wheelhouse/;
+  - python ~/virtualenv/python${TRAVIS_PYTHON_VERSION}/bin/PySide6_postinstall.py -install
+  - pip install -r requirements.txt
+  - pip install flake8
+script:
+  - flake8
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - python -m pytest
+  - pip install twine==1.10.0
+deploy:
+  provider: pypi
+  user: Jefung
+  password:
+    secure: NeN/Y7haGLktjAyuL5b+iL5VUcatMDsLpcPqU4W3lsXaIz0Ca1gpQlWbmRhpX0rfJgShRaQLyOiVTsxNQEwuAR3cenCCKFNBXK8iRlgTmeuChEsDYoM0Oux34NrsOA8dAMvKmWcsCZSI6iFCmij8jFWvX1PXoY31qOGgWGTlfFFaK75OD+/prB0THBzTvS368LWCY/qQWEKHeTQ31JmVN/Bh7zMfkZ7DgvyC8YKr85WdoeXsUaGHe8Z7t1DdtcUlc45WaLpTBmvSspeR/9SgWK0CkkJBoowoAt2h+t9Tfr04h+IdYuHKnkUA7v53IgHFxSizfod9t0zb1eTOjiOPyJQrqoQDlb6mwF7rLLdo0Vvo0bSsa+nRJsyqJNICgDrVA7KepntGC9OSrCVt7ATvDhW9lQxhWPQU2XtGBtjEp7vba4xoa0R5CmBcwghww5mlWglgFLjTn7CXpuqP1PjntSfYuA5hRqMgJLUlqNkeHOBfmjmMWpADZ7buB3iqod6oqHtpSxQG+Hori0hQtF4EmMVeluddcxWA4Pk3sVmSOguY5fOrCnN2vHfKeDzqmek+mPMuZ0oVXyuKEQaLP2THHMfjJQIt2mqHVL+ZSYF4T74+/curGgAjzxIvaROXknESzb8e3Jm5H91SdFGzRh+1m48vgiAGun2uQzzjVUazx0M=
+  on:
+    tags: true
+    repo: KD-Group/quite6
+  edge:
+    branch: v1.8.45
