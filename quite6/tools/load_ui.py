@@ -1,16 +1,13 @@
 import codecs
 import os
-from typing import Union
 from xml.etree import ElementTree
 
 import st
 from PySide6.QtCore import QByteArray, QBuffer, QIODevice
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QWidget
 
 from . import load_qrc
-from .. import ext_classes
-from .. import scaling
+from .. import Widget, ext_classes, scaling
 
 
 @st.make_cache
@@ -40,7 +37,7 @@ def process_scaling(ui_content: str, ratio: float) -> str:
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + ui_content + '\n'
 
 
-def load_ui(parent=None, filename=None) -> Union[QWidget, QWidget]:
+def load_ui(parent=None, filename=None) -> Widget:
     assert isinstance(filename, str)
 
     ui_content = get_ui_content(filename)
