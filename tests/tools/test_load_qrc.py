@@ -1,5 +1,4 @@
 import os
-import sys
 import unittest
 
 from PySide6.QtCore import QFile, QIODevice
@@ -8,7 +7,6 @@ import quite6
 
 
 class MyTestCase(unittest.TestCase):
-    @unittest.skipIf(condition=(sys.platform != 'win32'), reason='RCC Just For Windows')
     def test_load_text_file_in_qrc(self):
         file_path = os.path.join(os.path.dirname(__file__), 'res/test.qrc')
         quite6.load_qrc(file_path)
