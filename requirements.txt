@@ -1,5 +1,5 @@
 st
-prett6==1.2
+prett6
 PySide6
 typing
 pyqtgraph
