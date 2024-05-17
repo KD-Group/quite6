@@ -15,7 +15,7 @@ class Painter(QPainter):
                   background_round_size: int = 2):
         current_pen = self.pen()
 
-        self.setPen(Qt.PenStyle.transparent)
+        self.setPen(QColor(0, 0, 0, 0))
         if background_color:
             self.setBrush(background_color)
         else:
