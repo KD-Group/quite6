@@ -1,9 +1,10 @@
 import quite6
+from PySide6.QtGui import QFont
 
 
 class CustomWidget(quite6.Widget):
     def paint(self, painter: quite6.Painter):
-        painter.setFont(quite6.QFont('Courier New', 14.0))
+        painter.setFont(QFont('Courier New', 14))
         painter.draw_text_bottom_right(quite6.PointF(0, 0), 'Custom Widget')
         painter.end()
 
