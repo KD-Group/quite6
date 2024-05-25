@@ -22,6 +22,6 @@ from .widgets import ListWidget, ComboBox
 from .widgets import SpinBox, DoubleSpinBox
 from .widgets import InputDialog
 from .widgets import Action, Shortcut, PushButton, RatioButton
-from .widgets import TableWidget, TableView
+from .widgets import TabWidget, TableWidget, TableView
 from .widgets import PlotWidget
 from .widgets import Layout

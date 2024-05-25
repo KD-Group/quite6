@@ -15,6 +15,7 @@ from .plot_widget import PlotWidget
 from .push_button import PushButton
 from .shortcut import Shortcut
 from .spin_box import SpinBox
+from .tab_widget import TabWidget
 from .table_widget import TableWidget
 from .widget import Widget
 from .radio_button import RatioButton
