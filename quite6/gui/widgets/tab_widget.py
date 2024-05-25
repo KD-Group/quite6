@@ -20,7 +20,7 @@ class TabWidget(QTabWidget, ContainerAbilityInterface, ExcitedSignalInterface,
             mouse_event = event
             pos = mouse_event.position().toPoint()
             index = self.tabBar().tabAt(pos)
-            if self.check_before_switch is None or not self.check_before_switch(index):
+            if self.check_before_switch is not None and not self.check_before_switch(index):
                 return True
         return super().eventFilter(obj, event)
 

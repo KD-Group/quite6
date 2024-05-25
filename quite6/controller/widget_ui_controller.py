@@ -4,7 +4,7 @@ from quite6.gui.widgets import DateTimeEdit
 from . import WidgetController
 from .. import load_ui
 from ..gui import Action, SignalSender
-from ..gui import DoubleSpinBox, TableWidget, TableView
+from ..gui import DoubleSpinBox, TabWidget, TableWidget, TableView
 from ..gui import GroupBox, SpinBox
 from ..gui import Label, PushButton, RatioButton
 from ..gui import Layout
@@ -71,6 +71,9 @@ class WidgetUiController(WidgetController):
 
     def table_view(self, name=None) -> TableView:
         return self.__get_widget__('table_view', name)
+
+    def tab(self, name=None) -> TabWidget:
+        return self.__get_widget__('tab', name)
 
     def double(self, name=None) -> DoubleSpinBox:
         return self.__get_widget__('double', name)

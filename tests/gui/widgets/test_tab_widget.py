@@ -1,4 +1,3 @@
-import st
 import quite6
 import unittest
 
