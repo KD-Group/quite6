@@ -1,8 +1,23 @@
 import os
-import st
-import sys
 import subprocess
+import sys
+from pathlib import Path
+
 import PySide6
+import st
+
+
+def find_executable_rcc(filename: str):
+    paths = os.environ['PATH'].split(os.pathsep)
+    paths.append(os.path.dirname(PySide6.__file__))
+    paths.append(str(Path(PySide6.__file__).parents[2]))
+    paths.append(os.path.join(os.path.dirname(PySide6.__file__)))
+    for path in paths:
+        pyside6_rcc_path = os.path.join(path, filename)
+        if os.path.exists(pyside6_rcc_path) and os.access(pyside6_rcc_path, os.X_OK):
+            return pyside6_rcc_path
+    return None
+
 
 if sys.platform == 'darwin':
     pyside6_path = os.path.dirname(sys.executable)
@@ -10,12 +25,12 @@ if sys.platform == 'darwin':
     if not os.path.exists(rcc_path):
         print(f'PySide6 Resource Compiler (pyside6-rcc) Not Found in platform {rcc_path}!')
 elif sys.platform == 'win32':
-    pyside6_path = os.path.dirname(PySide6.__file__)
-    rcc_path = os.path.join(pyside6_path, 'pySide6-rcc.exe')
-    if not os.path.exists(rcc_path):
-        rcc_path = 'PySide6-rcc.exe'
-    if not os.path.exists(rcc_path):
-        print('PySide6 Resource Compiler (PySide6-rcc.exe) Not Found!')
+    rcc_path = find_executable_rcc('pySide6-rcc.exe')
+    if rcc_path is None:
+        rcc_path = find_executable_rcc('PySide6-rcc.exe')
+        if rcc_path is None:
+            if not os.path.exists('pySide6-rcc.exe') and not os.path.exists('PySide6-rcc.exe'):
+                raise FileNotFoundError('PySide6 Resource Compiler (PySide6-rcc.exe) Not Found!')
 else:
     print(f"Unsupported platform {sys.platform} for pyside6-rcc")
 

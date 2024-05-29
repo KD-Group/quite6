@@ -4,10 +4,10 @@ from xml.etree import ElementTree
 
 import st
 from PySide6.QtCore import QByteArray, QBuffer, QIODevice
-from PySide6.QtUiTools import QUiLoader
 
 from . import load_qrc
 from .. import Widget, ext_classes, scaling
+from ..gui.qt_gui import uiLoader
 
 
 @st.make_cache
@@ -61,7 +61,7 @@ def auto_generate_cache(dir_path: str):
 @st.singleton
 class UiLoader:
     def __init__(self):
-        self.loader = QUiLoader()
+        self.loader = uiLoader
         for cls in ext_classes:
             self.loader.registerCustomWidget(cls)
 
