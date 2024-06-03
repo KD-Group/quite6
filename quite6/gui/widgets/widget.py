@@ -14,13 +14,13 @@ class Widget(QWidget, ClosedSignalInterface, ClassExecInterface, ContainerAbilit
         super().__init__(parent.w if getattr(parent, 'w', None) is not None else parent, *args)
 
     def closeEvent(self, event: QCloseEvent):
-        self.closed.emit()
+        self._closed.emit()
         event.accept()
 
     def exec(self):
         with EventLoop() as event:
             self.show()
-            self.closed.connect(event.quit)
+            self._closed.connect(event.quit)
 
     @property
     def background_color(self):

@@ -2,15 +2,18 @@ import typing
 
 import numpy as np
 import pyqtgraph as pg
+from PySide6.QtGui import QCloseEvent
 from PySide6.QtGui import QFont
 
+from .. import ClosedSignalInterface, ClassExecInterface
+from .. import EventLoop
 from .. import ui_extension
 
 pg.setConfigOptions(antialias=True)
 
 
 @ui_extension
-class PlotWidget(pg.PlotWidget):
+class PlotWidget(pg.PlotWidget, ClosedSignalInterface, ClassExecInterface):
     def __init__(self, parent=None):
         super().__init__(parent=parent, background=(255, 255, 255))
 
@@ -27,6 +30,15 @@ class PlotWidget(pg.PlotWidget):
             self.getPlotItem().showAxis(axis)
             self.getPlotItem().getAxis(axis).tickFont = font
             self.getPlotItem().getAxis(axis).setPen(self.axis_pen)
+
+    def closeEvent(self, event: QCloseEvent):
+        self._closed.emit()
+        event.accept()
+
+    def exec(self):
+        with EventLoop() as event:
+            self.show()
+            self._closed.connect(event.quit)
 
     def plot(self, x=None, y=None):
         """

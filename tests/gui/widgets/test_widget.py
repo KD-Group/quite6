@@ -7,7 +7,7 @@ class MyTestCase(unittest.TestCase):
         w = quite6.Widget()
         executed = [False]
 
-        @quite6.connect_with(w.closed)
+        @quite6.connect_with(w._closed)
         def is_closed():
             executed[0] = True
 

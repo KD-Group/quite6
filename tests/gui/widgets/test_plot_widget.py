@@ -67,6 +67,18 @@ class TestPlotCase(unittest.TestCase):
         timer.start(3000)
         plot_widget_controller.exec()
 
+    def test_plot_widget_closed_signal(self):
+        self.plot_widget = quite6.PlotWidget()
+        executed = [False]
+
+        @quite6.connect_with(self.plot_widget._closed)
+        def is_closed():
+            executed[0] = True
+
+        quite6.later(0.01, self.plot_widget.close)
+        self.plot_widget.exec()
+        self.assertTrue(executed[0])
+
 
 if __name__ == '__main__':
     unittest.main()

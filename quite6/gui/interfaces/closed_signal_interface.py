@@ -4,7 +4,7 @@ from .. import SignalSender
 
 class ClosedSignalInterface(BaseInterface):
     @property
-    def closed(self) -> SignalSender:
+    def _closed(self) -> SignalSender:
         return self._create(SignalSender)
 
     @property

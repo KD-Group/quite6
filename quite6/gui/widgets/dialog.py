@@ -16,7 +16,7 @@ class Dialog(QDialog, ClosedSignalInterface, ContainerAbilityInterface):
 
     def closeEvent(self, event: QCloseEvent):
         if self.can_close:
-            self.closed.emit()
+            self._closed.emit()
             event.accept()
         else:
             self.cannot_closed.emit()
