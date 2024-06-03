@@ -32,13 +32,13 @@ class PlotWidget(pg.PlotWidget, ClosedSignalInterface, ClassExecInterface):
             self.getPlotItem().getAxis(axis).setPen(self.axis_pen)
 
     def closeEvent(self, event: QCloseEvent):
-        self._closed.emit()
+        self.quite_closed.emit()
         event.accept()
 
     def exec(self):
         with EventLoop() as event:
             self.show()
-            self._closed.connect(event.quit)
+            self.quite_closed.connect(event.quit)
 
     def plot(self, x=None, y=None):
         """

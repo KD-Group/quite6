@@ -12,7 +12,7 @@ from .. import ui_extension
 class MainWindow(QMainWindow, ClosedSignalInterface, ClassExecInterface, ContainerAbilityInterface):
     def closeEvent(self, event: QCloseEvent):
         if self.can_close:
-            self._closed.emit()
+            self.quite_closed.emit()
             event.accept()
         else:
             self.cannot_closed.emit()
@@ -21,4 +21,4 @@ class MainWindow(QMainWindow, ClosedSignalInterface, ClassExecInterface, Contain
     def exec(self):
         with EventLoop() as event:
             self.show()
-            self._closed.connect(event.quit)
+            self.quite_closed.connect(event.quit)

@@ -71,7 +71,7 @@ class TestPlotCase(unittest.TestCase):
         self.plot_widget = quite6.PlotWidget()
         executed = [False]
 
-        @quite6.connect_with(self.plot_widget._closed)
+        @quite6.connect_with(self.plot_widget.quite_closed)
         def is_closed():
             executed[0] = True
 
