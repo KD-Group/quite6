@@ -1,12 +1,21 @@
 import prett6
 from PySide6.QtWidgets import QLineEdit
 
-from .. import FocusInSignalInterface, FocusOutSignalInterface
+from .. import FocusInSignalInterface, FocusOutSignalInterface, ExcitedSignalInterface
 from .. import ui_extension
 
 
 @ui_extension
-class LineEdit(QLineEdit, prett6.WidgetStringInterface, FocusInSignalInterface, FocusOutSignalInterface):
+class LineEdit(QLineEdit,
+               prett6.WidgetStringInterface,
+               FocusInSignalInterface,
+               FocusOutSignalInterface,
+               ExcitedSignalInterface):
+
+    def set_excited_signal_connection(self):
+        # noinspection PyUnresolvedReferences
+        self.returnPressed.connect(self.excited.emit)
+
     class StringItem(prett6.WidgetStringItem):
         def __init__(self, parent: 'LineEdit'):
             self.parent = parent
