@@ -6,7 +6,7 @@
 ## Features
 
 1. powerful signal-slot
-2. user friendly widget classes
+2. user-friendly widget classes
 
 ## User Friendly Widget Classes
 
