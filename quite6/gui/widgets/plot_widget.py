@@ -25,8 +25,8 @@ class PlotWidget(pg.PlotWidget, ClosedSignalInterface, ClassExecInterface):
         self.setMouseEnabled(x=False, y=False)
 
         font = QFont('Arial', 10)
-        axises = ('top', 'bottom', 'left', 'right')
-        for axis in axises:
+        axes = ('top', 'bottom', 'left', 'right')
+        for axis in axes:
             self.getPlotItem().showAxis(axis)
             self.getPlotItem().getAxis(axis).tickFont = font
             self.getPlotItem().getAxis(axis).setPen(self.axis_pen)
@@ -40,16 +40,16 @@ class PlotWidget(pg.PlotWidget, ClosedSignalInterface, ClassExecInterface):
             self.show()
             self.quite_closed.connect(event.quit)
 
-    def plot(self, x=None, y=None):
+    def plot(self, x=None, y=None, *args, **kwargs):
         """
 
         :param x: array_like
         :param y: array_like
         :return: None
         """
-        self.getPlotItem().plot(x=x, y=y, pen=self.line_pen, symbolBrush=(0, 0, 255), symbolPen='w')
+        self.getPlotItem().plot(x=x, y=y, pen=self.line_pen, *args, **kwargs)
 
-    def append_plot(self, x=None, y=None):
+    def append_plot(self, x=None, y=None, *args, **kwargs):
         """
 
         :param x: array_like
@@ -67,7 +67,7 @@ class PlotWidget(pg.PlotWidget, ClosedSignalInterface, ClassExecInterface):
             y = np.append(old_data[1], y)
         # clear old data and repaint
         self.clear()
-        self.plot(x=x, y=y)
+        self.plot(x=x, y=y, *args, **kwargs)
 
     def clear(self):
         self.getPlotItem().clear()
