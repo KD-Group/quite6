@@ -1,6 +1,7 @@
 # quite6: QT UI Extension for Python3
 
 [![Build Status](https://travis-ci.com/KD-Group/quite6.svg?branch=master)](https://travis-ci.com/KD-Group/quite6)
+[![Build status](https://ci.appveyor.com/api/projects/status/tjyfaa06gxxsh479?svg=true)](https://ci.appveyor.com/project/Wingsgo/quite6)
 
 ## Features
 
