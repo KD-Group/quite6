@@ -1,13 +1,12 @@
 import prett6
 from PySide6.QtWidgets import QCheckBox
 
-from build.lib.quite6 import ExcitedSignalInterface
-from .. import BaseInterface
+from .. import ExcitedSignalInterface
 from .. import ui_extension
 
 
 @ui_extension
-class CheckBox(QCheckBox, BaseInterface, ExcitedSignalInterface, prett6.WidgetStringInterface, prett6.WidgetIndexInterface):
+class CheckBox(QCheckBox, ExcitedSignalInterface, prett6.WidgetStringInterface, prett6.WidgetIndexInterface):
 
     def set_excited_signal_connection(self):
         # noinspection PyUnresolvedReferences
