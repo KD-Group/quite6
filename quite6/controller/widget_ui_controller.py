@@ -5,7 +5,7 @@ from . import WidgetController
 from .. import load_ui
 from ..gui import Action, SignalSender
 from ..gui import DoubleSpinBox, TabWidget, TableWidget, TableView
-from ..gui import GroupBox, SpinBox
+from ..gui import GroupBox, SpinBox, CheckBox
 from ..gui import Label, PushButton, RatioButton
 from ..gui import Layout
 from ..gui import LineEdit, DateEdit, TextEdit, TimeEdit
@@ -65,6 +65,9 @@ class WidgetUiController(WidgetController):
 
     def spin(self, name=None) -> SpinBox:
         return self.__get_widget__('spin', name)
+
+    def check_box(self, name=None) -> CheckBox:
+        return self.__get_widget__('check_box', name)
 
     def table(self, name=None) -> TableWidget:
         return self.__get_widget__('table', name)
